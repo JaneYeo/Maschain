@@ -1,0 +1,38 @@
+[
+    {
+        "ic": "903889-09-9387",
+        "race": "Malay",
+        "category": "B40",
+        "alive": true
+    },
+    {
+        "ic": "903639-09-9987",
+        "race": "Malay",
+        "category": "M40",
+        "alive": true
+    },
+    {
+        "ic": "739033-06-8838",
+        "race": "Malay",
+        "category": "T20",
+        "alive": false
+    },
+    {
+        "ic": "683683-09-9739",
+        "race": "Cina",
+        "category": "B40",
+        "alive": false
+    },
+    {
+        "ic": "903889-09-9387",
+        "race": "India",
+        "category": "M40",
+        "alive": true
+    },
+    {
+        "ic": "560506-06-2540",
+        "race": "Malay",
+        "category": "M40",
+        "alive": true
+    }
+]
