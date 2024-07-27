@@ -62,23 +62,26 @@ async function main() {
         console.log('Both database and users loaded');
         for (let data of database) {
             for(let user of users){
-                if(data.ic==users.ic){
+                //if(data.ic==users.ic){
                     console.log('Checking data:', data);
                     if (data.race === "Malay" && data.category === "B40" && data.alive === true) {
                         console.log('Data meets criteria, creating wallet for each user');
                         for (let user of users) {
-                            await createUserWallet(user, data);
+                            //if(data.ic==users.ic){
+                                await createUserWallet(user, data);
+                            //}
+                            
                         }
                     } else {
                         console.log('Data does not meet criteria');
                     }
-                }
+               // }
                
             }
             
         }
     } else {
-        console.log('Either database or users failed to load');
+        //console.log('Either database or users failed to load');
     }
 }
 
