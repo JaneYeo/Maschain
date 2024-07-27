@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $field1 = $_POST['field1'];
-    $field2 = $_POST['field2'];
+    $field2 = $_POST['wallet_id'];
 
     // Handle file upload
     $pdfFile = $_FILES['pdfFile'];
@@ -44,4 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Invalid request method.";
 }
+
+include 'transfertoken.php';
 ?>

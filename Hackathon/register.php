@@ -73,19 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die('Registration failed: User with this IC number already exists.');
     }
 
-    // Add the new user data to users.json
-    $newUser = [
-        'name' => $name,
-        'ic' => $ic,
-        'password' => password_hash($password, PASSWORD_DEFAULT), // Ensure password is hashed
-        'phone_number' => $phoneNumber,
-        'email' => $email
-    ];
-    $users[] = $newUser;
+    
 
 
-    // Save the updated data back to the users.json file
-    writeJsonFile('users.json', $users);
+    
 
     $url = 'https://service-testnet.maschain.com/api/wallet/create-user';
 $clientId = '1a716398e73c7e2055cdab5aee60fdf86eee3f2a99c8141952eb7c8274b6f241';
@@ -119,10 +110,11 @@ $resultData = json_decode($result, true);
 
 if (isset($resultData['status']) && $resultData['status'] === 200 && isset($resultData['result']['wallet']['wallet_address'])) {
     $recipientAddress = $resultData['result']['wallet']['wallet_address'];
+    $recipientWalletId = $resultData['result']['wallet']['wallet_id'];
     echo "Recipient ID: " . $recipientAddress;
     // Call transferTokens function here if needed
     $walletAddress = "0xebD0a58Ea912C39d251E8C215cfc9af7c29d6228";
-$amount = 100;
+$amount = 1;
 $contractAddress = "0xa7e30c1c27BB46932Fc1466FF472e134d689B4D6";
 $callbackUrl = "https://postman-echo.com/post";
 
@@ -165,6 +157,21 @@ try {
 } else {
     die('Wallet creation failed or unexpected response structure');
 }
+
+
+// Add the new user data to users.json
+$newUser = [
+    'name' => $name,
+    'ic' => $ic,
+    'password' => password_hash($password, PASSWORD_DEFAULT), // Ensure password is hashed
+    'phone_number' => $phoneNumber,
+    'email' => $email,
+    'walled_address' => $recipientAddress
+];
+$users[] = $newUser;
+
+// Save the updated data back to the users.json file
+writeJsonFile('users.json', $users);
 
     // Notify user of successful registration and redirect
     echo '<script>

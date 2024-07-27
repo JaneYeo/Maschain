@@ -11,7 +11,7 @@ const checkTokenBalance = async () => {
     };
 
     const body = {
-      wallet_address: "0x3faa355e2B7E2107D0a396b1d71876962c3aBD22",
+      wallet_address: "0x2b14294531eBCdEfe53fc99c4c299B804a34780E",
       contract_address: "0xa7e30c1c27BB46932Fc1466FF472e134d689B4D6"
     };
   

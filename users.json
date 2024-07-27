@@ -4,6 +4,7 @@
         "ic": "903889-09-9387",
         "password": "$2y$10$3LtjndoTM9w8F49UmpuJJOdwBleFw9xtptMFRzFroaxsDzZD1YZ36",
         "phone_number": "123456789",
-        "email": "jimmy@gmail.com"
+        "email": "jimmy@gmail.com",
+        "wallet_id": 22222
     }
 ]
