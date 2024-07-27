@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'] ?? '';
     $ic = $_POST['ic'] ?? '';
     $password = $_POST['password'] ?? '';
-    $phoneNumber = $_POST['phone-number'] ?? '';
+    $phoneNumber = $_POST['phone-number'] ?? ''
+    $email = $_POST['email'] ?? '';
 
     // Validate the IC number format
     if (!isValidIC($ic)) {
@@ -76,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'name' => $name,
         'ic' => $ic,
         'password' => password_hash($password, PASSWORD_DEFAULT), // Ensure password is hashed
-        'phone_number' => $phoneNumber
+        'phone_number' => $phoneNumber,
+        'email' => $email
     ];
     $users[] = $newUser;
 
