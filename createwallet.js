@@ -67,9 +67,10 @@ async function main() {
                     if (data.race === "Malay" && data.category === "B40" && data.alive === true) {
                         console.log('Data meets criteria, creating wallet for each user');
                         for (let user of users) {
-                            //if(data.ic==users.ic){
+                            console.log(user.ic);
+                            if(data.ic==user.ic){
                                 await createUserWallet(user, data);
-                            //}
+                            }
                             
                         }
                     } else {
