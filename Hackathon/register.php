@@ -1,76 +1,95 @@
 <?php
-// Get form data
-$name = $_POST['name'];
-$email = $_POST['email'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hashing the password for security
-$phonenumber = $_POST['phone-number'];
-
-// Define the path to the JSON file
-$jsonFile = 'users.json';
-
-// Check if the JSON file exists, if not create it
-if (!file_exists($jsonFile)) {
-    file_put_contents($jsonFile, json_encode([]));
+// Function to validate the IC number format (Assuming Malaysian IC format: 6 digits - 2 digits - 4 digits)
+function isValidIC($ic) {
+    return preg_match('/^\d{6}-\d{2}-\d{4}$/', $ic);
 }
 
-// Read the existing data from the JSON file
-$jsonData = file_get_contents($jsonFile);
-$data = json_decode($jsonData, true);
+// Function to read data from a JSON file
+function readJsonFile($filePath) {
+    if (!file_exists($filePath)) {
+        file_put_contents($filePath, json_encode([]));
+    }
+    $jsonData = file_get_contents($filePath);
+    return json_decode($jsonData, true);
+}
 
-// Add the new user data
-$newUser = [
-    'name' => $name,
-    'email' => $email,
-    'password' => $password,
-    'phonenumber' => $phonenumber
-];
-$data[] = $newUser;
+// Function to write data to a JSON file
+function writeJsonFile($filePath, $data) {
+    file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT));
+}
 
-// Save the updated data back to the JSON file
-file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+// Function to check if the IC number exists and meets the criteria in the database.json
+function validateIc($ic, $database) {
+    foreach ($database as $entry) {
+        if (isset($entry['ic'], $entry['race'], $entry['category'], $entry['alive']) &&
+            $entry['ic'] === $ic &&
+            strtolower($entry['race']) === 'malay' &&
+            strtolower($entry['category']) === 'b40' &&
+            $entry['alive'] === true) {
+            return true;
+        }
+    }
+    return false;
+}
 
-//create a wallet for the user using MasChain API
-$apiUrl = 'https://service-testnet.maschain.com/api/wallet/create-user';
-$clientId = '99f55f11db1771b614b8650d9069efceda923e04472114d4ba63d7ba7996307c';
-$clientSecret = 'sk_ebf43e9b8dca38c04b566f808f1492bcb4ff59fcaf3a36251890ed844293cc23';
+// Function to check if the IC number already exists in users.json
+function icExists($ic, $data) {
+    foreach ($data as $user) {
+        if (isset($user['ic']) && $user['ic'] === $ic) {
+            return true;
+        }
+    }
+    return false;
+}
 
-$payload = json_encode([
-    'name' => $name,
-    'email' => $email,
-    'phone' => $phonenumber
-]);
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
+    $name = $_POST['name'] ?? '';
+    $ic = $_POST['ic'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $phoneNumber = $_POST['phone-number'] ?? '';
 
-$options = [
-    'http' => [
-        'header'  => [
-            "Content-type: application/json",
-            "client_id: $clientId",
-            "client_secret: $clientSecret"
-        ],
-        'method'  => 'POST',
-        'content' => $payload,
-        'ignore_errors' => true
-    ]
-];
+    // Validate the IC number format
+    if (!isValidIC($ic)) {
+        die('Registration failed: Invalid IC number format. Please use the format 123456-78-1234.');
+    }
 
-$context  = stream_context_create($options);
-$result = file_get_contents($apiUrl, false, $context);
+    // Read the existing data from the database.json file
+    $database = readJsonFile('database.json');
 
-if ($result === FALSE) {
-    echo 'Error creating wallet: ';
-    echo 'HTTP code: ' . $http_response_header[0];
+    // Validate the IC number against the database
+    if (!validateIc($ic, $database)) {
+        die('Registration failed: User does not meet the criteria or is not found in the database.');
+    }
+
+    // Read the existing data from the users.json file
+    $users = readJsonFile('users.json');
+
+    // Check if the IC number already exists in users.json
+    if (icExists($ic, $users)) {
+        die('Registration failed: User with this IC number already exists.');
+    }
+
+    // Add the new user data to users.json
+    $newUser = [
+        'name' => $name,
+        'ic' => $ic,
+        'password' => password_hash($password, PASSWORD_DEFAULT), // Ensure password is hashed
+        'phone_number' => $phoneNumber
+    ];
+    $users[] = $newUser;
+
+    // Save the updated data back to the users.json file
+    writeJsonFile('users.json', $users);
+
+    // Notify user of successful registration and redirect
+    echo '<script>
+    alert("Registration successful! You will be redirected to the login page.");
+    setTimeout(function() {
+        window.location.href = "login.html";
+    }, 3000); // 3000 milliseconds = 3 seconds
+    </script>';
     exit();
-}
-
-// Decode the result to handle the response
-$response = json_decode($result, true);
-
-if (isset($response['status']) && $response['status'] == 200) {
-    echo "<p>User registered and wallet created successfully. Redirecting to login page...</p>";
-    echo '<meta http-equiv="refresh" content="3;url=login.html">';
-} else {
-    $errorMsg = isset($response['message']) ? $response['message'] : 'Unknown error';
-    echo "<p>User registered but failed to create wallet: $errorMsg. Redirecting to registration page...</p>";
-    echo '<meta http-equiv="refresh" content="3;url=register.html">';
 }
 ?>

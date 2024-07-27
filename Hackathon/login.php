@@ -1,6 +1,6 @@
 <?php
 // Get form data
-$email = $_POST['email'];
+$name = $_POST['name'];
 $password = $_POST['password'];
 
 // Define the path to the JSON file
@@ -18,7 +18,7 @@ $data = json_decode($jsonData, true);
 // Check credentials
 $userFound = false;
 foreach ($data as $user) {
-    if ($user['email'] === $email && password_verify($password, $user['password'])) {
+    if ($user['name'] === $name && password_verify($password, $user['password'])) {
         $userFound = true;
         break;
     }
