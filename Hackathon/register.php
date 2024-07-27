@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
     // Validate the IC number format
-    if (!isValidIC($ic)) {
+    if(!isValidIC($ic)) {
         die('Registration failed: Invalid IC number format. Please use the format 123456-78-1234.');
     }
 
