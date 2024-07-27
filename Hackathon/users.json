@@ -1,0 +1,29 @@
+[
+    {
+        "name": "GAN WEI LIN",
+        "email": "ganweilin@gmail.com",
+        "password": "$2y$10$\/Cdciu\/tUHdj44om.twf\/uqdeRLhMZ8cDR8UjQSneukqnT1jGBW8q"
+    },
+    {
+        "name": "Lee Jia Cong",
+        "email": "leejiacong@gmail.com",
+        "password": "$2y$10$\/5BxcCFulPTlqcMZfCmI0OiWc3z6U5MP6v\/mAwn.DMNCFWuyp4RdG"
+    },
+    {
+        "name": null,
+        "email": null,
+        "password": "$2y$10$vKQLj1rZzqGlGk885HvFPOHhivm1alOiAII17.MGWf30vfeisc\/IW"
+    },
+    {
+        "name": "Jimmy",
+        "email": "jimmy@gmail.com",
+        "password": "$2y$10$9G\/EuNHJw9uqAW07eaWzRuq5tW6NhRog1fL2NyarrR9dq63z0rxBa",
+        "phonenumber": "0123456789"
+    },
+    {
+        "name": "jimmy",
+        "email": "jimmy@gmail.com",
+        "password": "$2y$10$V1TJ6A2rWxsL3HUpJzEj4uz1BtaPbrwxbYgVSXPOm5hiUr4hqdXam",
+        "phonenumber": "012345678"
+    }
+]
