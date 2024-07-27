@@ -25,8 +25,8 @@ async function fetchUserdb() {
 
 async function createUserWallet(user, data) {
     const url = 'https://service-testnet.maschain.com/api/wallet/create-user';
-    const clientId = '99f55f11db1771b614b8650d9069efceda923e04472114d4ba63d7ba7996307c';
-    const clientSecret = 'sk_ebf43e9b8dca38c04b566f808f1492bcb4ff59fcaf3a36251890ed844293cc23';
+    const clientId = '1a716398e73c7e2055cdab5aee60fdf86eee3f2a99c8141952eb7c8274b6f241';
+    const clientSecret = '0xa7e30c1c27BB46932Fc1466FF472e134d689B4D6';
 
     const payload = {
         name: user.name,
