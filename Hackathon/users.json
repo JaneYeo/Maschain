@@ -6,5 +6,13 @@
         "password": "$2y$10$y8Cyavd3ZelQvFjhYTdx3OGJPJnyZ\/ew.4HNJ8Csm.Y5zy8OLme\/S",
         "phone_number": "11111111"
     
+    },
+    {
+        "name": "YEE",
+        "email": "aaaa@gmail.com",
+        "ic": "903889-13-9387",
+        "password": "$2y$10$y8Cyavd3ZelQvFjhYTdx3OGJPJnyZ\/ew.4HNJ8Csm.Y5zy8OLme\/S",
+        "phone_number": "11111111"
+    
     }
 ]
