@@ -1,0 +1,18 @@
+[
+    {
+        "name": "jimmy",
+        "ic": "903889-09-9234",
+        "password": "$2y$10$bc4OPRiACduJFGKYAlLequMpwc9VQRxr9.AcT69C3b27aG4kXnOdS",
+        "phone_number": "123445",
+        "email": "leejiacong@gmail.com",
+        "walled_address": "0xF3041b82025A155D779954546eb0B5A9B4c419bC"
+    },
+    {
+        "name": "CCE",
+        "ic": "903889-09-9387",
+        "password": "$2y$10$fb2KZ2J5aWjA3nd.3zRJGuQQWQdY5kQjyfIEAUlIZgNJWA1dw\/SRq",
+        "phone_number": "12345678",
+        "email": "leejiacong@gmail.com",
+        "walled_address": "0x635340bb85CC0BA36C2C3A8aF44B5e5d45cC0D50"
+    }
+]
